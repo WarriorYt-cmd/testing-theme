@@ -44,8 +44,8 @@ import os
 # ============================================================
 
 st.set_page_config(
-    page_title="ChemCraft - Cheminformatics Lab",
-    page_icon="⛏️",
+    page_title="ChemSportx",
+    page_icon="🚗",
     layout="wide"
 )
 
@@ -77,10 +77,10 @@ MINECRAFT_THEME = True
 # ============================================================
 # YOUR DETAILS  (edit only the text inside the quotes)
 # ============================================================
-APP_AUTHOR = "Your Name"                    # e.g. "Priya Sharma"
+APP_AUTHOR = "ABHAY RAJ"                    # e.g. "Priya Sharma"
 APP_ROLE = "Student"                        # e.g. "B.Tech Student"
-APP_DEPARTMENT = "Your Department"          # e.g. "Department of Chemistry"
-APP_ORGANISATION = "Your College / University"
+APP_DEPARTMENT = "BTECH CSE AI ML"          # e.g. "Department of Chemistry"
+APP_ORGANISATION = "SRMIST TRICHY"
 APP_EMAIL = ""                              # e.g. "you@gmail.com"  (leave "" to hide)
 
 if MINECRAFT_THEME:
@@ -1204,21 +1204,17 @@ page = st.sidebar.radio(
 
         "📈 Structure–Property Analysis",
 
-        "📝 Assessment",
-
-        "📄 Final Project Report"
-
+        
     ]
 )
 
 st.sidebar.divider()
 
-st.sidebar.markdown("### 👩‍🎓 Student Information")
-student_name = st.sidebar.text_input("Student Name", key="student_name")
-registration_number = st.sidebar.text_input("Registration Number", key="registration_number")
+
+registration_number = st.sidebar.text_input("Registration Number Of DEVELOPER :", key="registration_number")
 
 st.sidebar.markdown("""
-### 🎓 Learning Objectives
+### 🎓 WHAT THE THINGS YOU WILL LEARN ??
 
 Students can learn:
 
@@ -1248,12 +1244,12 @@ if page == "🏠 Home":
             st.image(logo_path, use_container_width=True)
 
     st.markdown(
-        '<div class="main-title">⛏️ ChemCraft: Cheminformatics Lab</div>',
+        '<div class="main-title">🚗CHEMSPORTX : Cheminformatics Lab</div>',
         unsafe_allow_html=True
     )
 
     st.markdown(
-        f'<div class="mc-subtitle">Mine molecules. Craft knowledge.</div>'
+        f'<div class="mc-subtitle">EXPLORE molecules. MODIFY knowledge.</div>'
         f'<div style="text-align:center; margin-top:8px;">'
         f'Built by {APP_AUTHOR} | {APP_ORGANISATION}</div>',
         unsafe_allow_html=True
@@ -1287,7 +1283,6 @@ if page == "🏠 Home":
 
     ✅ Compare multiple molecules
 
-    ✅ Complete an assessment
     """)
 
     st.markdown("### Example Molecules")
@@ -2022,122 +2017,15 @@ Enter one molecule per line in the format:
 # ASSESSMENT
 # ============================================================
 
-elif page == "📝 Assessment":
 
-    st.title("📝 Cheminformatics Assessment")
-
-    questions = [
-        {"question":"What is the full form of SMILES?", "options":["Simplified Molecular Input Line Entry System","Standard Molecular Information Language Encoding System","Simple Molecular Identification and Labeling System"], "answer":"Simplified Molecular Input Line Entry System"},
-        {"question":"What does a SMILES string represent?", "options":["A molecular structure using text","A spectroscopy technique","A laboratory instrument"], "answer":"A molecular structure using text"},
-        {"question":"Which SMILES represents ethanol?", "options":["CCO","c1ccccc1","CC(=O)O"], "answer":"CCO"},
-        {"question":"Which SMILES represents benzene?", "options":["c1ccccc1","CCO","O=C=O"], "answer":"c1ccccc1"},
-        {"question":"In SMILES, parentheses are mainly used to indicate:", "options":["Branches","Molecular weight","Atom colour"], "answer":"Branches"},
-        {"question":"Which property is commonly associated with molecular lipophilicity?", "options":["LogP","TPSA","HBD"], "answer":"LogP"},
-        {"question":"What does TPSA describe?", "options":["Topological Polar Surface Area","Total Pi Surface Area","Thermal Property Surface Analysis"], "answer":"Topological Polar Surface Area"},
-        {"question":"What does HBA mean?", "options":["Hydrogen Bond Acceptor","Heavy Bond Atom","Hydrogen Bond Analysis"], "answer":"Hydrogen Bond Acceptor"},
-        {"question":"What does HBD mean?", "options":["Hydrogen Bond Donor","Heavy Bond Descriptor","Hydrogen Bond Distance"], "answer":"Hydrogen Bond Donor"},
-        {"question":"A double bond contains how many pi (π) bonds?", "options":["1","2","0"], "answer":"1"},
-        {"question":"A triple bond contains how many pi (π) bonds?", "options":["2","1","3"], "answer":"2"},
-        {"question":"Which model is useful for visualizing approximate molecular volume?", "options":["Space Filling","Wireframe only","Text SMILES"], "answer":"Space Filling"}
-    ]
-
-    student_answers = []
-
-    for i, q in enumerate(questions):
-
-        answer = st.radio(
-            q["question"],
-            q["options"],
-            index=None,
-            key=f"assessment_v2_{i}"
-        )
-
-        student_answers.append(answer)
-
-    if st.button("Submit Assessment"):
-
-        if any(answer is None for answer in student_answers):
-            st.warning("Please answer all questions before submitting the assessment.")
-            st.stop()
-
-        score = 0
-
-        for i, q in enumerate(questions):
-
-            if student_answers[i] == q["answer"]:
-                score += 1
-
-        percentage = (score / len(questions)) * 100
-
-        st.success(
-            f"Your Score: {score}/{len(questions)}"
-        )
-
-        st.metric(
-            "Percentage",
-            f"{percentage:.1f}%"
-        )
-
-        if percentage >= 80:
-
-            st.balloons()
-
-            st.success("🏆 Advancement Made: Master Chemist!")
-
-        elif percentage >= 50:
-
-            st.info("⛏️ Good mining! Keep practicing to level up.")
-
-        else:
-
-            st.warning(
-                "📚 Please review the Theory section and try again."
-            )
+     
 
 # ============================================================
 # FINAL PROJECT REPORT
 # ============================================================
 
-elif page == "📄 Final Project Report":
 
-    st.title("📄 Final Student Molecular Analysis Report")
-    st.write("This report uses the latest valid SMILES entered in the Molecular Properties Report page.")
-
-    name = st.text_input("Student Name for Report", value=st.session_state.get("student_name", ""), key="final_report_name")
-    reg = st.text_input("Registration Number for Report", value=st.session_state.get("registration_number", ""), key="final_report_reg")
-
-    default_smiles = st.session_state.get(
-        "latest_smiles",
-        st.session_state.get("active_smiles", "CCO")
-    )
-    report_smiles = st.text_input(
-        "SMILES for Final Report",
-        value=default_smiles,
-        key="final_report_smiles"
-    )
-    report_mol = get_molecule(report_smiles)
-
-    if report_mol is None:
-        st.error("❌ Please enter a valid SMILES notation for the final report.")
-    else:
-        report_properties = calculate_properties(report_mol)
-        st.success("✅ Valid molecule ready for the final report.")
-        st.write("**Molecular Formula:**", report_properties["Molecular Formula"])
-        st.write("**Molecular Weight:**", report_properties["Molecular Weight"], "g/mol")
-        st.write("**Sigma Bonds:**", report_properties["Sigma (σ) Bonds"])
-        st.write("**Pi Bonds:**", report_properties["Pi (π) Bonds"])
-
-        if st.button("📄 Generate Personalized Final Project Report"):
-            with st.spinner("Generating your personalized report with molecular structures and properties..."):
-                pdf = generate_final_report(name, reg, report_smiles, report_mol, report_properties)
-            st.success("✅ Final Project Report Generated Successfully!")
-            st.download_button(
-                label="⬇️ Download Personalized Final Project Report PDF",
-                data=pdf,
-                file_name="Cheminformatics_Final_Molecular_Report.pdf",
-                mime="application/pdf"
-            )
-
+   
 # ============================================================
 # FOOTER
 # ============================================================
